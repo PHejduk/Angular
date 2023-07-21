@@ -1,6 +1,7 @@
 <div>
-  <p>Witaj, {{ defaultUser.name }}!</p>
-  <h2>Twoje zadania</h2>
+  <p style="text-align: center;">Witaj, {{ defaultUser.name }}!</p>
+    <h2 style="text-align: center;">Zadania</h2>
+
 
 
   <ul>
@@ -9,17 +10,17 @@
       <button *ngIf="task.status !== 'todo'" (click)="updateTask(task, 'todo')">Todo</button>
       <button *ngIf="task.status !== 'doing'" (click)="updateTask(task, 'doing')">Doing</button>
       <button *ngIf="task.status !== 'done'" (click)="updateTask(task, 'done')">Done</button>
-      <button (click)="deleteTask(task.id)">Usuń</button> <!-- Przekazujemy identyfikator zadania do deleteTask() -->
+      <button (click)="deleteTask(task.id)">Usuń</button>
     </li>
   </ul>
 
-  <h3>Dodaj nowe zadanie:</h3>
+  <h3 style="text-align: center;">Dodaj nowe zadanie:</h3>
   <form (submit)="addTask()" #taskForm="ngForm">
-    <label>
+    <label style="text-align: center; font-size: large">
       Tytuł:
       <input type="text" name="title" [(ngModel)]="newTask.title" required>
     </label>
-    <label>
+    <label style="text-align: center; font-size: large">
       Opis:
       <textarea name="description" [(ngModel)]="newTask.description" required></textarea>
     </label>
