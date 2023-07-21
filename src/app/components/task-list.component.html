@@ -3,22 +3,12 @@
   <p>Witaj, {{ defaultUser.name }}!</p>
 
   <ul>
-    <li *ngFor="let task of getFilteredTasks()">
-      <div class="task-item">
-        <a href="#">{{ task.title }}</a> ({{ task.status }})
-        <div class="task-buttons">
-          <button class="btn-todo" *ngIf="task.status !== 'todo'" (click)="updateTask(task, 'todo')">Todo</button>
-          <button class="btn-doing" *ngIf="task.status !== 'doing'" (click)="updateTask(task, 'doing')">Doing</button>
-          <button class="btn-done" *ngIf="task.status !== 'done'" (click)="updateTask(task, 'done')">Done</button>
-          <button class="btn-delete" (click)="deleteTask(task.id)">Usuń</button>
-          <button (click)="toggleImportant(task)">Ważne</button>
-          <span *ngIf="task.important">✨</span>
-          <button (click)="setFilterStatus('all')">Wszystkie</button>
-          <button (click)="setFilterStatus('todo')">Todo</button>
-          <button (click)="setFilterStatus('doing')">Doing</button>
-          <button (click)="setFilterStatus('done')">Done</button>
-        </div>
-      </div>
+    <li *ngFor="let task of tasks">
+      <a href="#">{{ task.title }}</a> ({{ task.status }})
+      <button *ngIf="task.status !== 'todo'" (click)="updateTask(task, 'todo')">Todo</button>
+      <button *ngIf="task.status !== 'doing'" (click)="updateTask(task, 'doing')">Doing</button>
+      <button *ngIf="task.status !== 'done'" (click)="updateTask(task, 'done')">Done</button>
+      <button (click)="deleteTask(task.id)">Usuń</button> <!-- Przekazujemy identyfikator zadania do deleteTask() -->
     </li>
   </ul>
 

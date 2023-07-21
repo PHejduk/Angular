@@ -6,7 +6,6 @@ import { UserService } from '../services/user.service';
 @Component({
   selector: 'app-task-list',
   templateUrl: './task-list.component.html',
-  styleUrls: ['./task-list.component.scss']
 })
 export class TaskListComponent {
   tasks: Task[];
@@ -16,7 +15,6 @@ export class TaskListComponent {
     description: '',
     status: 'todo',
     functionalityId: 0,
-    important: false
   };
   defaultUser: { name: string };
   private nextId: number = 1;
@@ -35,22 +33,9 @@ export class TaskListComponent {
     this.taskService.deleteTask(taskId);
   }
 
-  addTask() {
-    this.newTask.id = this.taskService.getNextTaskId();
-    this.taskService.addTask(this.newTask);
-    this.newTask = { id: 0, title: '', description: '', status: 'todo', functionalityId: 0, important: false };
-  }
-
-  getFilteredTasks(): Task[] {
-    // Puste ciało metody
-    return [];
-  }
-
-  toggleImportant(task: Task): void {
-    // Puste ciało metody
-  }
-
-  setFilterStatus(status: string): void {
-    // Puste ciało metody
+  addTask(): void {
+    const newTaskWithId: Task = { ...this.newTask, id: this.nextId++ };
+    this.taskService.addTask(newTaskWithId);
+    this.newTask = { id: 0, title: '', description: '', status: 'todo', functionalityId: 0 };
   }
 }
