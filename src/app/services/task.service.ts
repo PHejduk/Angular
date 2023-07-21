@@ -12,7 +12,7 @@ export class TaskService {
   }
 
   addTask(task: Task): void {
-    this.tasks.push(task); // Dodajemy kopię zadania do listy 'tasks'
+    this.tasks.push(task);
   }
 
   updateTask(task: Task): void {
@@ -22,7 +22,13 @@ export class TaskService {
     }
   }
 
-  deleteTask(taskId: number): void {
-    this.tasks = this.tasks.filter((task) => task.id !== taskId);
+  deleteTask(id: number) {
+    const taskIndex = this.tasks.findIndex((task) => task.id === id);
+    if (taskIndex !== -1) {
+      this.tasks.splice(taskIndex, 1);
+    }
+  }
+  getNextTaskId(): number {
+    return this.tasks.length > 0 ? this.tasks[this.tasks.length - 1].id + 1 : 1;
   }
 }

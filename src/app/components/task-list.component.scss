@@ -1,0 +1,47 @@
+.task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 8px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.task-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.btn-todo {
+  background-color: #ffc107;
+  color: #fff;
+}
+
+.btn-doing {
+  background-color: #17a2b8;
+  color: #fff;
+}
+
+.btn-done {
+  background-color: #28a745;
+  color: #fff;
+}
+
+.btn-delete {
+  background-color: #dc3545;
+  color: #fff;
+}
+
+/* Środkowanie elementów */
+ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+li {
+  list-style: none;
+}
