@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Task } from '../models';
 import { TaskService } from '../services/task.service';
 import { UserService } from '../services/user.service';
+import { FunctionalityService } from '../services/functionality.service';
 
 @Component({
   selector: 'app-task-list',
@@ -19,8 +20,13 @@ export class TaskListComponent {
   };
   defaultUser: { name: string };
   private nextId: number = 1;
+  filterStatus: 'all' | 'todo' | 'doing' | 'done' = 'all';
 
-  constructor(private taskService: TaskService, private userService: UserService) {
+  constructor(
+    private taskService: TaskService,
+    private userService: UserService,
+    private functionalityService: FunctionalityService
+  ) {
     this.tasks = taskService.getTasks();
     this.defaultUser = userService.getDefaultUser();
   }
@@ -38,5 +44,32 @@ export class TaskListComponent {
     const newTaskWithId: Task = { ...this.newTask, id: this.nextId++ };
     this.taskService.addTask(newTaskWithId);
     this.newTask = { id: 0, title: '', description: '', status: 'todo', functionalityId: 0 };
+  }
+
+  getFilteredTasks(): Task[] {
+    const filteredTasks = this.tasks.filter(task => {
+      if (this.filterStatus === 'all') {
+        return true;
+      }
+      return task.status === this.filterStatus;
+    });
+
+
+    filteredTasks.sort((a, b) => {
+      const functionalityA = this.functionalityService.getFunctionalities().find(func => func.id === a.functionalityId);
+      const functionalityB = this.functionalityService.getFunctionalities().find(func => func.id === b.functionalityId);
+
+      if (functionalityA && functionalityB) {
+        return functionalityA.title.localeCompare(functionalityB.title);
+      } else if (functionalityA) {
+        return -1;
+      } else if (functionalityB) {
+        return 1;
+      } else {
+        return 0;
+      }
+    });
+
+    return filteredTasks;
   }
 }

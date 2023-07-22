@@ -1,12 +1,18 @@
 <div>
   <p style="text-align: center;">Witaj, {{ defaultUser.name }}!</p>
-    <h2 style="text-align: center;">Zadania</h2>
-
-
-
+  <h2 style="text-align: center;">Zadania</h2>
+  <p style="text-align: center;">Filtruj po statusie:
+  <label style="text-align: center;"></label>
+  <select [(ngModel)]="filterStatus" style="margin-bottom: 10px;">
+    <option value="all">Wszystkie</option>
+    <option value="todo">Todo</option>
+    <option value="doing">Doing</option>
+    <option value="done">Done</option>
+  </select>
+  </p>
   <ul>
-    <li *ngFor="let task of tasks">
-      <a href="#">{{ task.title }}</a> ({{ task.status }})
+    <li *ngFor="let task of getFilteredTasks()">
+      <a href="#">{{ task.title }}</a> ({{ task.status }}) - {{ task.description }} <!-- Dodajemy wyświetlanie opisu zadania -->
       <button *ngIf="task.status !== 'todo'" (click)="updateTask(task, 'todo')">Todo</button>
       <button *ngIf="task.status !== 'doing'" (click)="updateTask(task, 'doing')">Doing</button>
       <button *ngIf="task.status !== 'done'" (click)="updateTask(task, 'done')">Done</button>

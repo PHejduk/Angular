@@ -11,6 +11,6 @@ export class FunctionalityService {
   ];
 
   getFunctionalities(): Functionality[] {
-    return this.functionalities;
+    return this.functionalities.slice().sort((a, b) => a.title.localeCompare(b.title));
   }
 }

@@ -1,17 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { FunctionalityListComponent } from './components/functionality-list.component';
+import { RouterModule, Routes } from '@angular/router';
 import { TaskListComponent } from './components/task-list.component';
+import { FunctionalityListComponent } from './components/functionality-list.component';
 
 const routes: Routes = [
-  { path: 'functionalities', component: FunctionalityListComponent },
+  { path: '', redirectTo: '/tasks', pathMatch: 'full' },
   { path: 'tasks', component: TaskListComponent },
-  { path: '', redirectTo: '/functionalities', pathMatch: 'full' },
-  { path: '**', redirectTo: '/functionalities', pathMatch: 'full' },
+  { path: 'functionalities', component: FunctionalityListComponent }, // Nowa ścieżka dla funkcjonalności
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }
